@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" /><!--在使用DMI动态方法调用时，设置为true,否则会出现调用异常问题-->
+	<constant name="struts.devMode" value="true" />
+	
+	<!-- 常规Action配置 -->
+	<package name="hell" namespace="/hell" extends="struts-default">
+		<!-- 访问控制 -->
+        <action name="index" class="com.edu.action.Hell">
+            <result>
+                /hello.jsp
+            </result>
+            <result name="error">
+                /error.jsp
+            </result>
+        </action>
+    </package>
+    
+    <!-- 使用通配符进行动态方法绑定的Action配置 -->
+    <package name="user" namespace="/user" extends="struts-default">
+		<!-- 访问控制 -->
+        <action name="index" class="com.edu.action.UserAction">
+            <result>
+                /index.jsp
+            </result>
+        </action>
+        <action name="*_*" class="com.edu.action.{1}Action" method="{2}">
+            <result>
+                /{2}.jsp
+            </result>
+        </action>
+    </package>
+
+    <!-- Add packages here -->
+
+</struts>

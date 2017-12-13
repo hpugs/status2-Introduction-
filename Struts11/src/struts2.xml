@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<default-action-ref name="index"></default-action-ref>
+	
+		<action name="index" class="com.edu.action.UserAction">
+            <result>
+                /index.jsp
+            </result>
+        </action>
+		<!-- 访问控制 -->
+        <action name="hell" class="com.edu.action.UserAction">
+            <result>
+                /hello.jsp
+            </result>
+        </action>
+    </package>
+    
+    <package name="inputFilter" namespace="/inputFilter" extends="struts-default">
+    
+    	<default-action-ref name="index"></default-action-ref>
+	
+		<action name="index" class="com.edu.action.InputErrorFilter">
+            <result>/index.jsp</result>
+        </action>
+		<!-- 访问控制 -->
+        <action name="login" class="com.edu.action.InputErrorFilter" method="login">
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+    </package>
+
+</struts>

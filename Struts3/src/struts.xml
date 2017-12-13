@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+<!--    <constant name="struts.enable.DynamicMethodInvocation" value="false" />-->
+<!--	 设是否为调试模式 -->
+<!--    <constant name="struts.devMode" value="true" />-->
+
+<!--    <package name="default" namespace="/" extends="struts-default">-->
+
+<!--		 默认访问文件 -->
+<!--        <default-action-ref name="index" />-->
+
+<!--		 出错处理文件 -->
+<!--        <global-results>-->
+<!--            <result name="error">/error.jsp</result>-->
+<!--        </global-results>-->
+
+<!--		 错误类型 -->
+<!--        <global-exception-mappings>-->
+<!--            <exception-mapping exception="java.lang.Exception" result="error"/>-->
+<!--        </global-exception-mappings>-->
+
+<!--		 访问控制 -->
+<!--        <action name="index">-->
+<!--            <result type="redirectAction">-->
+<!--                <param name="actionName">HelloWorld</param>-->
+<!--                <param name="namespace">/example</param>-->
+<!--            </result>-->
+<!--        </action>-->
+<!--    </package>-->
+
+<!--    <include file="example.xml"/>-->
+
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="hell" namespace="/hell" extends="struts-default">
+		<!-- 访问控制 -->
+        <action name="index">
+            <result>
+                /hello.jsp
+            </result>
+        </action>
+    </package>
+
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="user" class="com.edu.action.User" method="login">
+            <result name="success" type="redirectAction">
+            	<param name="actionName">index</param>
+            	<param name="namespace">/hell</param>
+            </result>
+            <result name="error">
+                /error.jsp
+            </result>
+        </action>
+    </package>
+    <!-- Add packages here -->
+
+</struts>

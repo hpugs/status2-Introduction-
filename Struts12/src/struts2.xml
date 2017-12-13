@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<default-action-ref name="index"></default-action-ref>
+	
+		<action name="index" class="com.edu.action.UserAction">
+            <result>
+                /index.jsp
+            </result>
+        </action>
+		<!-- 访问控制 -->
+        <action name="hell" class="com.edu.action.UserAction">
+            <result>
+                /hello.jsp
+            </result>
+        </action>
+    </package>
+    
+    <package name="inputFilter" namespace="/inputFilter" extends="struts-default">
+    
+    	<default-action-ref name="index"></default-action-ref>
+	
+		<action name="index" class="com.edu.action.InputErrorFilter">
+            <result>/index.jsp</result>
+        </action>
+		<!-- 访问控制 -->
+        <action name="login" class="com.edu.action.InputErrorFilter" method="login">
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+    </package>
+    
+    <package name="resultFilter" namespace="/resultFilter" extends="struts-default">
+    	<!-- http://localhost:8080/Struts12/resultFilter/default -->
+		<action name="default" class="com.edu.action.ResultFilter">
+			<result name="success">/default.jsp</result>
+		</action>
+		
+		<!-- http://localhost:8080/Struts12/resultFilter/dispatcher 服务端跳转-->
+		<action name="dispatcher" class="com.edu.action.ResultFilter" method="Dispatcher">
+			<result name="success" type="dispatcher">/dispatcher.jsp</result>
+		</action>
+		
+		<!-- http://localhost:8080/Struts12/resultFilter/redirect   客户端跳转 -->
+		<action name="redirect" class="com.edu.action.ResultFilter" method="Redirect">
+			<result name="success" type="redirect">/redirect.jsp</result>
+		</action>
+		
+		<!-- http://localhost:8080/Struts12/resultFilter/chain 动作链跳转-->
+		<!-- http://blog.csdn.net/randomnet/article/details/8656759 -->
+		<action name="chain" class="com.edu.action.ResultFilter" method="Chain">
+			<result name="success" type="chain">chain1</result>
+		</action>
+		<action name="chain1" class="com.edu.action.ResultFilter" method="Chain">
+			<result name="success">/chain.jsp</result>
+		</action>
+		
+		<!-- http://localhost:8080/Struts12/resultFilter/redirectAction 客户端跳转-->
+		<action name="redirectAction" class="com.edu.action.ResultFilter" method="RedirectAction">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/redirectAction</param>
+				<param name="actionName">default</param>
+			</result>
+		</action>
+    </package>
+    
+    <package name="redirectAction" namespace="/redirectAction" extends="struts-default">
+		<action name="default" class="com.edu.action.ResultFilter">
+			<result name="success">/redirectAction.jsp</result>
+		</action>
+    </package>
+
+</struts>

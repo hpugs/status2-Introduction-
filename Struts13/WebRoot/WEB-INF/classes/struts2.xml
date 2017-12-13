@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<default-action-ref name="index"></default-action-ref>
+    	
+    	<!-- http://localhost:8080/Struts13/login?name=3 -->
+    	<global-results>
+    		<result name="other">/other.jsp</result>
+    	</global-results>
+	
+		<action name="login" class="com.edu.action.Login">
+			<!-- http://localhost:8080/Struts13/login?name=1 -->
+			<result name="success">/success.jsp</result>
+			<!-- http://localhost:8080/Struts13/login?name=2 -->
+			<result name="error">/error.jsp</result>
+		</action>
+    </package>
+
+</struts>
